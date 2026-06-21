@@ -28,7 +28,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .header-title { color: white; font-size: 15px; font-weight: 700; }
 .header-sub { color: rgba(255,255,255,0.55); font-size: 11px; margin-top: 1px; }
 
-/* GOOGLE LOGIN */
 .gdrive-bar { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .gdrive-info { display: flex; align-items: center; gap: 8px; }
 .gdrive-icon { font-size: 20px; }
@@ -61,6 +60,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .key-info { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px; text-align: center; }
 .key-info span { color: #6EE7B7; font-weight: 700; }
 
+/* API WEBSITE */
+.api-website-wrap { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; margin-bottom: 14px; }
+.aw-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.aw-row { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+.aw-label { font-size: 11px; font-weight: 700; color: var(--muted); min-width: 70px; }
+.aw-input { flex: 1; padding: 8px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-size: 12px; color: var(--text); outline: none; font-family: monospace; }
+.aw-input:focus { border-color: var(--teal); }
+.btn-save-api { padding: 8px 16px; background: var(--teal); color: white; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.aw-status { font-size: 11px; margin-top: 6px; padding: 5px 10px; border-radius: var(--radius-sm); display: none; }
+.aw-status.ok { background: var(--success-lt); color: var(--success); display: block; }
+.aw-status.err { background: var(--danger-lt); color: var(--danger); display: block; }
+
 /* UPLOAD */
 .upload-area { border: 2px dashed var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; }
 .upload-area.drag { border-color: var(--teal); background: var(--teal-lt); }
@@ -78,7 +89,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .drive-upload-status.ok { background: var(--success-lt); color: var(--success); display: block; }
 .drive-upload-status.err { background: var(--danger-lt); color: var(--danger); display: block; }
 
-/* TOGGLE PERUSAHAAN */
 .toggle-wrap { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 .toggle-label { font-size: 13px; font-weight: 700; }
 .toggle-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
@@ -118,10 +128,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .tag-opt { background: var(--bg); color: var(--muted); }
 .tag-search { background: var(--amber-lt); color: #92400E; }
 .field-val { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; position: relative; min-height: 40px; }
-.cbtn { position: absolute; top: 7px; right: 7px; background: var(--teal); color: white; border: none; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; cursor: pointer; opacity: 1; }
+.cbtn { position: absolute; top: 7px; right: 7px; background: var(--teal); color: white; border: none; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; cursor: pointer; }
 .cbtn.ok { background: var(--success); }
 
-/* URL field */
 .url-field { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12px; color: var(--teal); word-break: break-all; position: relative; display: none; }
 .url-field.show { display: block; }
 
@@ -135,6 +144,17 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 
 .btn-excel { width: 100%; padding: 14px; background: var(--green); color: white; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
 .btn-excel:active { background: #155233; }
+
+/* SUBMIT TO WEBSITE */
+.submit-wrap { background: white; border: 2px solid var(--teal); border-radius: var(--radius); padding: 16px; margin-bottom: 14px; }
+.submit-title { font-size: 13px; font-weight: 700; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.btn-submit { width: 100%; padding: 14px; background: var(--teal-dk); color: white; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-submit:active { opacity: .85; }
+.btn-submit:disabled { background: var(--muted); cursor: not-allowed; }
+.submit-status { font-size: 12px; margin-top: 8px; padding: 8px 12px; border-radius: var(--radius-sm); display: none; line-height: 1.5; }
+.submit-status.ok { background: var(--success-lt); color: var(--success); display: block; }
+.submit-status.err { background: var(--danger-lt); color: var(--danger); display: block; }
+.submit-link { color: var(--teal); font-weight: 700; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -164,7 +184,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     </div>
   </div>
 
-  <!-- API KEYS -->
+  <!-- API KEYS OPENAI -->
   <div class="api-wrap">
     <div class="api-title">🔑 OpenAI API Keys — Fallback Otomatis</div>
     <div class="key-row">
@@ -184,6 +204,21 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     </div>
     <button class="btn-save" onclick="saveKeys()">Simpan Keys</button>
     <div class="key-info" id="keyInfo">Belum ada key tersimpan</div>
+  </div>
+
+  <!-- API WEBSITE -->
+  <div class="api-website-wrap">
+    <div class="aw-title">🌐 Koneksi Website Loker Arsitek</div>
+    <div class="aw-row">
+      <div class="aw-label">Endpoint</div>
+      <input class="aw-input" id="apiEndpoint" type="text" placeholder="http://127.0.0.1:8000/api/loker/submit" />
+    </div>
+    <div class="aw-row">
+      <div class="aw-label">API Key</div>
+      <input class="aw-input" id="apiWebKey" type="password" placeholder="LA-2026-..." />
+      <button class="btn-save-api" onclick="saveApiWeb(); testPing()">Simpan & Test</button>
+    </div>
+    <div class="aw-status" id="awStatus"></div>
   </div>
 
   <!-- UPLOAD POSTER -->
@@ -228,7 +263,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     </label>
   </div>
 
-  <!-- UPLOAD LOGO (muncul kalau toggle ON) -->
+  <!-- UPLOAD LOGO -->
   <div class="card" id="logoCard" style="display:none">
     <div class="card-header">
       <div class="card-icon" style="background:#FDF3E3">🏢</div>
@@ -265,7 +300,15 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 
   <!-- OUTPUT -->
   <div class="output-wrap" id="outputWrap">
-    <div class="done-badge">✅ Selesai</div>
+    <div class="done-badge">✅ Selesai diekstrak</div>
+
+    <!-- SUBMIT TO WEBSITE -->
+    <div class="submit-wrap" id="submitWrap">
+      <div class="submit-title">🌐 Submit ke Website Loker Arsitek</div>
+      <button class="btn-submit" id="btnSubmit" onclick="submitToWebsite()">🚀 Tambahkan ke Website</button>
+      <div class="submit-status" id="submitStatus"></div>
+    </div>
+
     <button class="btn-excel" onclick="downloadExcel()">📊 Download Excel</button>
 
     <div class="tabs" id="tabsWrap">
@@ -302,19 +345,15 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <div class="field-val" id="fGajiMax"><button class="cbtn" onclick="cp('fGajiMax',this)">Copy</button></div>
       </div>
       <div class="field-group">
-        <div class="field-label">Tampilkan Gaji <span class="field-tag tag-opt">opsional</span></div>
-        <div class="field-val" id="fTampilGaji"><button class="cbtn" onclick="cp('fTampilGaji',this)">Copy</button></div>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Hubungi <span class="field-tag tag-opt">opsional</span></div>
+        <div class="field-label">Contact Person <span class="field-tag tag-opt">opsional</span></div>
         <div class="field-val" id="fHubungi"><button class="cbtn" onclick="cp('fHubungi',this)">Copy</button></div>
       </div>
       <div class="field-group">
-        <div class="field-label">Kualifikasi <span class="field-tag tag-opt">biarkan kosong</span></div>
-        <div class="field-val" style="color:var(--muted);font-style:italic">Tidak perlu diisi — sudah ada di Deskripsi</div>
+        <div class="field-label">Kualifikasi <span class="field-tag tag-opt">masuk lowongan_details</span></div>
+        <div class="field-val" id="fKualifikasi" style="min-height:100px"><button class="cbtn" onclick="cp('fKualifikasi',this)">Copy</button></div>
       </div>
       <div class="field-group">
-        <div class="field-label">Deskripsi <span class="field-tag tag-opt">paste ke rich text editor</span></div>
+        <div class="field-label">Deskripsi <span class="field-tag tag-opt">masuk lowongan_details</span></div>
         <div class="field-val" id="fDeskripsi" style="min-height:140px"><button class="cbtn" onclick="cp('fDeskripsi',this)">Copy</button></div>
       </div>
       <div class="field-group">
@@ -330,10 +369,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
       <div class="field-group">
         <div class="field-label">Keyword <span class="field-tag tag-opt">pisah koma</span></div>
         <div class="field-val" id="fKeyword"><button class="cbtn" onclick="cp('fKeyword',this)">Copy</button></div>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Status</div>
-        <div class="field-val" id="fStatus"><button class="cbtn" onclick="cp('fStatus',this)">Copy</button></div>
       </div>
     </div>
 
@@ -353,20 +388,12 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <div class="field-val" id="pKota"><button class="cbtn" onclick="cp('pKota',this)">Copy</button></div>
       </div>
       <div class="field-group">
-        <div class="field-label">Provinsi <span class="field-tag tag-search">🔍 search</span></div>
+        <div class="field-label">Provinsi</div>
         <div class="field-val" id="pProvinsi"><button class="cbtn" onclick="cp('pProvinsi',this)">Copy</button></div>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Kodepos <span class="field-tag tag-search">🔍 search</span></div>
-        <div class="field-val" id="pKodepos"><button class="cbtn" onclick="cp('pKodepos',this)">Copy</button></div>
       </div>
       <div class="field-group">
         <div class="field-label">Telepon <span class="field-tag tag-search">🔍 search</span></div>
         <div class="field-val" id="pTelepon"><button class="cbtn" onclick="cp('pTelepon',this)">Copy</button></div>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Email <span class="field-tag tag-search">🔍 search</span></div>
-        <div class="field-val" id="pEmail"><button class="cbtn" onclick="cp('pEmail',this)">Copy</button></div>
       </div>
       <div class="field-group">
         <div class="field-label">Email HRD</div>
@@ -377,14 +404,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <div class="field-val" id="pWebsite"><button class="cbtn" onclick="cp('pWebsite',this)">Copy</button></div>
       </div>
       <div class="field-group">
-        <div class="field-label">Jenis Perusahaan <span class="field-tag tag-search">🔍 search</span></div>
-        <div class="field-val" id="pJenis"><button class="cbtn" onclick="cp('pJenis',this)">Copy</button></div>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Bidang Usaha <span class="field-tag tag-search">🔍 search</span></div>
-        <div class="field-val" id="pBidang"><button class="cbtn" onclick="cp('pBidang',this)">Copy</button></div>
-      </div>
-      <div class="field-group">
         <div class="field-label">Instagram</div>
         <div class="field-val" id="pIg"><button class="cbtn" onclick="cp('pIg',this)">Copy</button></div>
       </div>
@@ -392,10 +411,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <div class="field-label">Logo URL <span class="field-tag tag-opt">Google Drive</span></div>
         <div class="url-field" id="pLogoUrl"><button class="cbtn" onclick="cpUrl('pLogoUrl',this)">Copy</button></div>
         <div style="font-size:11px;color:var(--muted);margin-top:4px" id="pLogoUrlHint">Upload logo di atas untuk dapat URL otomatis</div>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Status</div>
-        <div class="field-val" id="pStatus"><button class="cbtn" onclick="cp('pStatus',this)">Copy</button></div>
       </div>
     </div>
 
@@ -420,16 +435,11 @@ const FOLDER_NAME = 'Loker Arsitek';
 
 // ── STATE ──
 let keys = [];
-let imgB64 = null;
-let logoB64 = null;
-let imgFile = null;
-let logoFile = null;
-let lastData = null;
-let gdriveToken = null;
-let posterDriveUrl = null;
-let logoDriveUrl = null;
-let driveClient = null;
-let driveFolderId = null;
+let imgB64 = null, logoB64 = null, imgFile = null, logoFile = null;
+let lastData = null, gdriveToken = null;
+let posterDriveUrl = null, logoDriveUrl = null;
+let driveClient = null, driveFolderId = null;
+let apiEndpoint = '', apiWebKey = '';
 
 // ── UMR 2026 ──
 const UMR = {
@@ -441,7 +451,6 @@ const UMR = {
   'bogor':4813988,'palembang':3800000,'balikpapan':3500000,'samarinda':3200000,
   'pekanbaru':3294625,'batam':4381172,'manado':3600000,'pontianak':3000000,
   'banjarmasin':3282812,'padang':2994031,'lampung':2893069,'cirebon':2685560,
-  'serang':4090799,'cilegon':4500000,
 };
 function getUMR(kota) {
   if (!kota) return 3000000;
@@ -450,12 +459,11 @@ function getUMR(kota) {
   return 3000000;
 }
 
-// ── GOOGLE DRIVE AUTH ──
+// ── GOOGLE DRIVE ──
 function handleGdriveAuth() {
   if (gdriveToken) return;
   driveClient = google.accounts.oauth2.initTokenClient({
-    client_id: GDRIVE_CLIENT_ID,
-    scope: GDRIVE_SCOPE,
+    client_id: GDRIVE_CLIENT_ID, scope: GDRIVE_SCOPE,
     callback: async (resp) => {
       if (resp.error) { showErr('Google login gagal: ' + resp.error); return; }
       gdriveToken = resp.access_token;
@@ -465,196 +473,179 @@ function handleGdriveAuth() {
   });
   driveClient.requestAccessToken();
 }
-
 function signOutGoogle() {
   if (gdriveToken) google.accounts.oauth2.revoke(gdriveToken);
-  gdriveToken = null; driveFolderId = null;
-  posterDriveUrl = null; logoDriveUrl = null;
+  gdriveToken = null; driveFolderId = null; posterDriveUrl = null; logoDriveUrl = null;
   updateGdriveUI(false);
 }
-
 function updateGdriveUI(connected) {
   document.getElementById('btnGdrive').textContent = connected ? '✓ Terhubung' : 'Login Google';
   document.getElementById('btnGdrive').className = 'btn-gdrive' + (connected ? ' connected' : '');
   document.getElementById('btnGdriveOut').style.display = connected ? 'block' : 'none';
   document.getElementById('gdriveSubText').textContent = connected ? 'Drive terhubung — gambar auto-upload' : 'Login untuk upload gambar otomatis';
 }
-
 async function ensureDriveFolder() {
   try {
-    const search = await fetch(`https://www.googleapis.com/drive/v3/files?q=name='${FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false&fields=files(id,name)`, {
-      headers: { 'Authorization': 'Bearer ' + gdriveToken }
-    });
+    const search = await fetch(`https://www.googleapis.com/drive/v3/files?q=name='${FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false&fields=files(id,name)`,
+      {headers:{'Authorization':'Bearer '+gdriveToken}});
     const data = await search.json();
-    if (data.files && data.files.length > 0) {
-      driveFolderId = data.files[0].id;
-    } else {
-      const create = await fetch('https://www.googleapis.com/drive/v3/files', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + gdriveToken, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: FOLDER_NAME, mimeType: 'application/vnd.google-apps.folder' })
-      });
-      const folder = await create.json();
-      driveFolderId = folder.id;
+    if (data.files&&data.files.length>0) { driveFolderId=data.files[0].id; }
+    else {
+      const create = await fetch('https://www.googleapis.com/drive/v3/files',{method:'POST',
+        headers:{'Authorization':'Bearer '+gdriveToken,'Content-Type':'application/json'},
+        body:JSON.stringify({name:FOLDER_NAME,mimeType:'application/vnd.google-apps.folder'})});
+      const folder = await create.json(); driveFolderId=folder.id;
     }
-    // Set folder public
-    await fetch(`https://www.googleapis.com/drive/v3/files/${driveFolderId}/permissions`, {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + gdriveToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ role: 'reader', type: 'anyone' })
-    });
-  } catch(e) { console.error('Folder error:', e); }
+    await fetch(`https://www.googleapis.com/drive/v3/files/${driveFolderId}/permissions`,{method:'POST',
+      headers:{'Authorization':'Bearer '+gdriveToken,'Content-Type':'application/json'},
+      body:JSON.stringify({role:'reader',type:'anyone'})});
+  } catch(e){console.error('Folder error:',e);}
 }
-
-async function uploadToDrive(file, b64, filename) {
-  if (!gdriveToken || !driveFolderId) return null;
+async function uploadToDrive(file,b64,filename) {
+  if (!gdriveToken||!driveFolderId) return null;
   try {
-    const mimeType = file.type || 'image/jpeg';
-    const binary = atob(b64);
-    const arr = new Uint8Array(binary.length);
-    for (let i=0;i<binary.length;i++) arr[i]=binary.charCodeAt(i);
-    const blob = new Blob([arr], {type: mimeType});
-
-    const meta = JSON.stringify({ name: filename, parents: [driveFolderId] });
-    const form = new FormData();
-    form.append('metadata', new Blob([meta], {type:'application/json'}));
-    form.append('file', blob);
-
-    const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webContentLink', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + gdriveToken },
-      body: form
-    });
-    const data = await res.json();
-    if (!data.id) return null;
-
-    // Set public
-    await fetch(`https://www.googleapis.com/drive/v3/files/${data.id}/permissions`, {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + gdriveToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ role: 'reader', type: 'anyone' })
-    });
-
+    const mimeType=file.type||'image/jpeg';
+    const binary=atob(b64),arr=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++) arr[i]=binary.charCodeAt(i);
+    const blob=new Blob([arr],{type:mimeType});
+    const meta=JSON.stringify({name:filename,parents:[driveFolderId]});
+    const form=new FormData();
+    form.append('metadata',new Blob([meta],{type:'application/json'}));
+    form.append('file',blob);
+    const res=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webContentLink',
+      {method:'POST',headers:{'Authorization':'Bearer '+gdriveToken},body:form});
+    const data=await res.json();
+    if(!data.id) return null;
+    await fetch(`https://www.googleapis.com/drive/v3/files/${data.id}/permissions`,{method:'POST',
+      headers:{'Authorization':'Bearer '+gdriveToken,'Content-Type':'application/json'},
+      body:JSON.stringify({role:'reader',type:'anyone'})});
     return `https://drive.google.com/uc?export=view&id=${data.id}`;
-  } catch(e) { console.error('Upload error:', e); return null; }
+  } catch(e){console.error('Upload error:',e);return null;}
 }
 
-// ── API KEYS ──
+// ── API WEBSITE ──
+function saveApiWeb() {
+  apiEndpoint = document.getElementById('apiEndpoint').value.trim();
+  apiWebKey   = document.getElementById('apiWebKey').value.trim();
+  localStorage.setItem('la_api_endpoint', apiEndpoint);
+  localStorage.setItem('la_api_key', apiWebKey);
+}
+async function testPing() {
+  const status = document.getElementById('awStatus');
+  if (!apiEndpoint) { showAwStatus('err', 'Endpoint belum diisi.'); return; }
+  const pingUrl = apiEndpoint.replace('/submit','').replace('/loker','') + '/loker/ping';
+  try {
+    showAwStatus('ok', '⏳ Testing...');
+    const res = await fetch(pingUrl, {method:'GET'});
+    const data = await res.json();
+    if (data.status === 'ok') {
+      showAwStatus('ok', '✅ Koneksi berhasil — ' + (data.message || 'API aktif'));
+    } else {
+      showAwStatus('err', '❌ Respons tidak valid: ' + JSON.stringify(data));
+    }
+  } catch(e) {
+    showAwStatus('err', '❌ Tidak bisa terhubung: ' + e.message);
+  }
+}
+function showAwStatus(type, msg) {
+  const el = document.getElementById('awStatus');
+  el.className = 'aw-status ' + type;
+  el.textContent = msg;
+}
+
+// ── OPENAI API KEYS ──
 function saveKeys() {
-  const vals = ['k1','k2','k3'].map(id => document.getElementById(id).value.trim());
-  keys = vals.filter(k => k.startsWith('sk-'));
+  const vals = ['k1','k2','k3'].map(id=>document.getElementById(id).value.trim());
+  keys = vals.filter(k=>k.startsWith('sk-'));
   if (!keys.length) { alert('Minimal satu API key valid (diawali sk-)'); return; }
   localStorage.setItem('la_keys', JSON.stringify(keys));
   updateDots(vals);
-  document.getElementById('keyInfo').innerHTML = `<span>${keys.length} key</span> tersimpan · fallback aktif`;
+  document.getElementById('keyInfo').innerHTML=`<span>${keys.length} key</span> tersimpan · fallback aktif`;
 }
 function loadKeys() {
   const saved = localStorage.getItem('la_keys');
-  if (!saved) return;
-  keys = JSON.parse(saved);
-  keys.forEach((k,i) => { document.getElementById(['k1','k2','k3'][i]).value = k; });
-  updateDots(keys);
-  document.getElementById('keyInfo').innerHTML = `<span>${keys.length} key</span> tersimpan · fallback aktif`;
+  if (saved) {
+    keys = JSON.parse(saved);
+    keys.forEach((k,i)=>{document.getElementById(['k1','k2','k3'][i]).value=k;});
+    updateDots(keys);
+    document.getElementById('keyInfo').innerHTML=`<span>${keys.length} key</span> tersimpan · fallback aktif`;
+  }
+  // Load API website
+  apiEndpoint = localStorage.getItem('la_api_endpoint') || 'http://127.0.0.1:8000/api/loker/submit';
+  apiWebKey   = localStorage.getItem('la_api_key') || '';
+  document.getElementById('apiEndpoint').value = apiEndpoint;
+  document.getElementById('apiWebKey').value   = apiWebKey;
 }
 function updateDots(vals) {
-  ['kd1','kd2','kd3'].forEach((id,i) => {
-    document.getElementById(id).className = 'key-dot'+(vals[i]&&vals[i].startsWith('sk-')?' ok':'');
+  ['kd1','kd2','kd3'].forEach((id,i)=>{
+    document.getElementById(id).className='key-dot'+(vals[i]&&vals[i].startsWith('sk-')?' ok':'');
   });
 }
-
 async function callAPI(payload) {
   if (!keys.length) throw new Error('Simpan API key dulu.');
   let lastErr;
   for (let i=0;i<keys.length;i++) {
     try {
       setLoad(`Proses Key ${i+1}...`);
-      const res = await fetch('https://api.openai.com/v1/chat/completions', {
-        method:'POST',
+      const res=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',
         headers:{'Content-Type':'application/json','Authorization':'Bearer '+keys[i]},
-        body: JSON.stringify(payload)
-      });
-      if (res.status===429||res.status===402) { lastErr=new Error(`Key ${i+1} limit`); continue; }
-      if (!res.ok) { const e=await res.json(); throw new Error(e.error?.message||`Error ${res.status}`); }
+        body:JSON.stringify(payload)});
+      if(res.status===429||res.status===402){lastErr=new Error(`Key ${i+1} limit`);continue;}
+      if(!res.ok){const e=await res.json();throw new Error(e.error?.message||`Error ${res.status}`);}
       document.getElementById('keyInfo').innerHTML=`Menggunakan <span>Key ${i+1}</span> · fallback aktif`;
       return await res.json();
-    } catch(e) { lastErr=e; if(i<keys.length-1) continue; }
+    } catch(e){lastErr=e;if(i<keys.length-1) continue;}
   }
   throw lastErr||new Error('Semua key gagal.');
 }
 
 // ── UPLOAD FILE ──
-function onFile(e, type) {
-  const file = e.target.files[0];
-  if (file) loadImg(file, type);
-}
-function onDrag(e, areaId) { e.preventDefault(); document.getElementById(areaId).classList.add('drag'); }
-function onDrop(e, type) {
+function onFile(e,type){const f=e.target.files[0];if(f)loadImg(f,type);}
+function onDrag(e,areaId){e.preventDefault();document.getElementById(areaId).classList.add('drag');}
+function onDrop(e,type){
   e.preventDefault();
-  const areaId = type==='poster'?'uploadArea':'logoUploadArea';
+  const areaId=type==='poster'?'uploadArea':'logoUploadArea';
   document.getElementById(areaId).classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) loadImg(f, type);
+  const f=e.dataTransfer.files[0];
+  if(f&&f.type.startsWith('image/')) loadImg(f,type);
 }
-
-function loadImg(file, type) {
-  const r = new FileReader();
-  r.onload = async e => {
-    const b64 = e.target.result.split(',')[1];
-    if (type==='poster') {
-      imgB64=b64; imgFile=file;
-      document.getElementById('previewImg').src = e.target.result;
+function loadImg(file,type) {
+  const r=new FileReader();
+  r.onload=async e=>{
+    const b64=e.target.result.split(',')[1];
+    if(type==='poster'){
+      imgB64=b64;imgFile=file;
+      document.getElementById('previewImg').src=e.target.result;
       document.getElementById('uploadArea').style.display='none';
       document.getElementById('previewWrap').style.display='block';
-
-      // Auto upload ke Drive kalau sudah login
-      if (gdriveToken) {
-        const status = document.getElementById('posterDriveStatus');
-        status.className='drive-upload-status';
-        status.textContent='⏳ Upload ke Google Drive...';
-        status.style.display='block';
-        const ts = new Date().toISOString().slice(0,10);
-        const url = await uploadToDrive(file, b64, `poster_${ts}_${file.name}`);
-        if (url) {
-          posterDriveUrl=url;
-          status.className='drive-upload-status ok';
-          status.textContent='✅ Uploaded ke Drive';
-          showUrlField('fPosterUrl', url, 'fPosterUrlHint');
-        } else {
-          status.className='drive-upload-status err';
-          status.textContent='❌ Upload gagal — copy manual';
-        }
+      if(gdriveToken){
+        const status=document.getElementById('posterDriveStatus');
+        status.className='drive-upload-status';status.textContent='⏳ Upload ke Google Drive...';status.style.display='block';
+        const ts=new Date().toISOString().slice(0,10);
+        const url=await uploadToDrive(file,b64,`poster_${ts}_${file.name}`);
+        if(url){posterDriveUrl=url;status.className='drive-upload-status ok';status.textContent='✅ Uploaded ke Drive';showUrlField('fPosterUrl',url,'fPosterUrlHint');}
+        else{status.className='drive-upload-status err';status.textContent='❌ Upload gagal';}
       }
     } else {
-      logoB64=b64; logoFile=file;
-      document.getElementById('logoPreviewImg').src = e.target.result;
+      logoB64=b64;logoFile=file;
+      document.getElementById('logoPreviewImg').src=e.target.result;
       document.getElementById('logoUploadArea').style.display='none';
       document.getElementById('logoPreviewWrap').style.display='block';
-
-      if (gdriveToken) {
-        const status = document.getElementById('logoDriveStatus');
-        status.className='drive-upload-status';
-        status.textContent='⏳ Upload ke Google Drive...';
-        status.style.display='block';
-        const ts = new Date().toISOString().slice(0,10);
-        const url = await uploadToDrive(file, b64, `logo_${ts}_${file.name}`);
-        if (url) {
-          logoDriveUrl=url;
-          status.className='drive-upload-status ok';
-          status.textContent='✅ Uploaded ke Drive';
-          showUrlField('pLogoUrl', url, 'pLogoUrlHint');
-        } else {
-          status.className='drive-upload-status err';
-          status.textContent='❌ Upload gagal';
-        }
+      if(gdriveToken){
+        const status=document.getElementById('logoDriveStatus');
+        status.className='drive-upload-status';status.textContent='⏳ Upload ke Google Drive...';status.style.display='block';
+        const ts=new Date().toISOString().slice(0,10);
+        const url=await uploadToDrive(file,b64,`logo_${ts}_${file.name}`);
+        if(url){logoDriveUrl=url;status.className='drive-upload-status ok';status.textContent='✅ Uploaded ke Drive';showUrlField('pLogoUrl',url,'pLogoUrlHint');}
+        else{status.className='drive-upload-status err';status.textContent='❌ Upload gagal';}
       }
     }
   };
   r.readAsDataURL(file);
 }
-
 function removeImg(type) {
-  if (type==='poster') {
-    imgB64=null; imgFile=null; posterDriveUrl=null;
+  if(type==='poster'){
+    imgB64=null;imgFile=null;posterDriveUrl=null;
     document.getElementById('uploadArea').style.display='block';
     document.getElementById('previewWrap').style.display='none';
     document.getElementById('fileInput').value='';
@@ -664,7 +655,7 @@ function removeImg(type) {
     document.getElementById('fPosterUrl').classList.remove('show');
     document.getElementById('fPosterUrlHint').textContent='Login Google Drive untuk dapat URL otomatis';
   } else {
-    logoB64=null; logoFile=null; logoDriveUrl=null;
+    logoB64=null;logoFile=null;logoDriveUrl=null;
     document.getElementById('logoUploadArea').style.display='block';
     document.getElementById('logoPreviewWrap').style.display='none';
     document.getElementById('logoInput').value='';
@@ -673,74 +664,53 @@ function removeImg(type) {
     document.getElementById('pLogoUrlHint').textContent='Upload logo di atas untuk dapat URL otomatis';
   }
 }
-
-function toggleLogoUpload() {
-  const on = document.getElementById('togglePerusahaan').checked;
-  document.getElementById('logoCard').style.display = on ? 'block' : 'none';
+function toggleLogoUpload(){
+  document.getElementById('logoCard').style.display=document.getElementById('togglePerusahaan').checked?'block':'none';
 }
-
-function showUrlField(id, url, hintId) {
-  const el = document.getElementById(id);
-  const btn = el.querySelector('.cbtn');
-  el.textContent = url;
-  if (btn) el.appendChild(btn);
-  el.classList.add('show');
+function showUrlField(id,url,hintId){
+  const el=document.getElementById(id);const btn=el.querySelector('.cbtn');
+  el.textContent=url;if(btn)el.appendChild(btn);el.classList.add('show');
   document.getElementById(hintId).style.display='none';
 }
-
-function switchTab(id) {
-  const tabs = ['web','perusahaan','ig'];
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabs[i]===id));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+function switchTab(id){
+  const tabs=['web','perusahaan','ig'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===id));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
 }
 
-// ── MAIN ──
+// ── MAIN PROSES ──
 async function proses() {
-  if (!keys.length) { showErr('Simpan API key dulu.'); return; }
-  if (!imgB64) { showErr('Upload poster dulu.'); return; }
-  hideErr();
-  showLoad('Membaca poster...');
-  const includePerusahaan = document.getElementById('togglePerusahaan').checked;
-
+  if(!keys.length){showErr('Simpan API key dulu.');return;}
+  if(!imgB64){showErr('Upload poster dulu.');return;}
+  hideErr();showLoad('Membaca poster...');
+  const includePerusahaan=document.getElementById('togglePerusahaan').checked;
   try {
     setLoad('Menganalisis poster...');
-    const data = await extractPoster();
-
-    if (!data.gaji_min||data.gaji_min===0) {
-      const umr = getUMR(data.kota);
-      data.gaji_min = Math.round(umr*0.90/100000)*100000;
-      data.gaji_max = Math.round(umr*1.00/100000)*100000;
-      data.gaji_dari_umr = true;
+    const data=await extractPoster();
+    if(!data.gaji_min||data.gaji_min===0){
+      const umr=getUMR(data.kota);
+      data.gaji_min=Math.round(umr*0.95/100000)*100000;
+      data.gaji_max=Math.round(umr*1.05/100000)*100000;
+      data.gaji_dari_umr=true;
     }
-
-    let perusahaan = {};
-    if (includePerusahaan) {
-      setLoad('Mencari data perusahaan...');
-      perusahaan = await searchPerusahaan(data);
-    }
-
-    const caption = buildCaption(data);
-    lastData = { ...data, perusahaan, includePerusahaan };
-    render(data, perusahaan, caption, includePerusahaan);
-
+    let perusahaan={};
+    if(includePerusahaan){setLoad('Mencari data perusahaan...');perusahaan=await searchPerusahaan(data);}
+    const caption=buildCaption(data);
+    lastData={...data,perusahaan,includePerusahaan};
+    render(data,perusahaan,caption,includePerusahaan);
     hideLoad();
     document.getElementById('outputWrap').style.display='block';
-    document.getElementById('urgentWrap').style.display = data.urgently?'block':'none';
-
-    // Tampilkan tab perusahaan kalau toggle ON
-    document.getElementById('tabPerusahaan').style.display = includePerusahaan?'flex':'none';
-
+    document.getElementById('urgentWrap').style.display=data.urgently?'block':'none';
+    document.getElementById('tabPerusahaan').style.display=includePerusahaan?'flex':'none';
+    document.getElementById('submitStatus').className='submit-status';
+    document.getElementById('submitStatus').style.display='none';
     document.getElementById('outputWrap').scrollIntoView({behavior:'smooth',block:'start'});
-
-  } catch(e) {
-    hideLoad();
-    showErr('❌ ' + e.message);
-  }
+  } catch(e){hideLoad();showErr('❌ '+e.message);}
 }
 
 async function extractPoster() {
-  const prompt = `Kamu asisten portal lowongan kerja arsitektur Indonesia "Loker Arsitek".
+  const prompt=`Kamu asisten portal lowongan kerja arsitektur Indonesia "Loker Arsitek".
 Analisis poster ini, ekstrak semua data sebagai JSON valid:
 {
   "judul_lowongan": "Judul SEO-friendly",
@@ -766,50 +736,50 @@ Analisis poster ini, ekstrak semua data sebagai JSON valid:
   "keyword_seo": "3-5 kata kunci SEO pisah koma"
 }
 Respond HANYA dengan JSON valid.`;
-
-  const res = await callAPI({
-    model:'gpt-4.1', max_tokens:2000,
+  const res=await callAPI({model:'gpt-4.1',max_tokens:2000,
     messages:[{role:'user',content:[
       {type:'image_url',image_url:{url:'data:image/jpeg;base64,'+imgB64,detail:'high'}},
       {type:'text',text:prompt}
-    ]}]
-  });
+    ]}]});
   return JSON.parse(res.choices[0].message.content.trim().replace(/```json|```/g,'').trim());
 }
 
 async function searchPerusahaan(data) {
-  const prompt = `Cari informasi perusahaan/studio arsitektur:
+  const prompt=`Cari informasi perusahaan/studio arsitektur:
 Nama: ${data.nama_perusahaan}, Kota: ${data.kota}, IG: ${data.akun_ig||'-'}
-
 Kembalikan JSON:
 {"alamat":"","provinsi":"","kodepos":"","telepon":"","email":"","website":"","jenis_perusahaan":"Swasta","bidang_usaha":"Arsitektur"}
-
 Jika tidak ditemukan isi kosong. Respond HANYA JSON valid.`;
-
   let res;
   try {
-    for (let i=0;i<keys.length;i++) {
-      try {
-        const r = await fetch('https://api.openai.com/v1/chat/completions',{
-          method:'POST',
+    for(let i=0;i<keys.length;i++){
+      try{
+        const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',
           headers:{'Content-Type':'application/json','Authorization':'Bearer '+keys[i]},
-          body:JSON.stringify({model:'gpt-4o-search-preview',web_search_options:{},max_tokens:600,messages:[{role:'user',content:prompt}]})
-        });
+          body:JSON.stringify({model:'gpt-4o-search-preview',web_search_options:{},max_tokens:600,messages:[{role:'user',content:prompt}]})});
         if(r.status===429||r.status===402) continue;
         if(!r.ok) throw new Error('err');
-        res=await r.json(); break;
-      } catch(e){if(i===keys.length-1) throw e;}
+        res=await r.json();break;
+      }catch(e){if(i===keys.length-1) throw e;}
     }
-  } catch {
-    res = await callAPI({model:'gpt-4.1',max_tokens:600,messages:[{role:'user',content:prompt}]});
-  }
-  try { return JSON.parse(res.choices[0].message.content.trim().replace(/```json|```/g,'').trim()); }
-  catch { return {alamat:'',provinsi:'',kodepos:'',telepon:'',email:'',website:'',jenis_perusahaan:'Swasta',bidang_usaha:'Arsitektur'}; }
+  }catch{res=await callAPI({model:'gpt-4.1',max_tokens:600,messages:[{role:'user',content:prompt}]});}
+  try{return JSON.parse(res.choices[0].message.content.trim().replace(/```json|```/g,'').trim());}
+  catch{return{alamat:'',provinsi:'',kodepos:'',telepon:'',email:'',website:'',jenis_perusahaan:'Swasta',bidang_usaha:'Arsitektur'};}
+}
+
+function buildKualifikasiHtml(d) {
+  if (!d.kualifikasi_list || !d.kualifikasi_list.length) return '';
+  let html = '<ul>\n';
+  d.kualifikasi_list.forEach(k => {
+    html += `<li>${k.replace(/^[-•●*]\s*/,'').trim()}</li>\n`;
+  });
+  html += '</ul>';
+  return html;
 }
 
 function buildDeskripsi(d) {
-  let out = (d.deskripsi_perusahaan&&d.deskripsi_perusahaan.trim()) ? d.deskripsi_perusahaan.trim()+'\n\n' : `${d.nama_perusahaan} sedang membuka lowongan untuk posisi ${d.posisi}.\n\n`;
-  out += `Kualifikasi & Persyaratan\n`;
+  let out=(d.deskripsi_perusahaan&&d.deskripsi_perusahaan.trim())?d.deskripsi_perusahaan.trim()+'\n\n':`${d.nama_perusahaan} sedang membuka lowongan untuk posisi ${d.posisi}.\n\n`;
+  out+=`Kualifikasi & Persyaratan\n`;
   (d.kualifikasi_list||[]).forEach(k=>{out+=`● ${k.replace(/^[-•●*]\s*/,'').trim()}\n`;});
   if(d.persyaratan_berkas&&d.persyaratan_berkas.trim()) out+=`\nPersyaratan Berkas\n${d.persyaratan_berkas.trim()}\n`;
   out+=`\nCara Melamar\nTertarik bergabung? Klik tombol "Lamar Sekarang" yang tersedia di halaman ini, atau kirimkan CV dan portofolio terbaik kamu ke:\n`;
@@ -822,9 +792,17 @@ function buildDeskripsi(d) {
   return out.trim();
 }
 
+function buildContactPerson(d) {
+  let out = '';
+  if(d.cara_melamar_teks&&d.cara_melamar_teks.trim()) out+=d.cara_melamar_teks.trim()+'\n';
+  if(d.hubungi) out+=`Email: ${d.hubungi}\n`;
+  if(d.format_subjek_email) out+=`Format subjek: ${d.format_subjek_email}\n`;
+  return out.trim();
+}
+
 function buildCaption(d) {
-  const urgent = d.urgently?'🚨 ':'';
-  let out = `${urgent}● ${d.kota}\n\n`;
+  const urgent=d.urgently?'🚨 ':'';
+  let out=`${urgent}● ${d.kota}\n\n`;
   if(d.teks_posisi_poster&&d.teks_posisi_poster.trim()) out+=`${d.teks_posisi_poster.trim()}\n\n`;
   out+=`Kualifikasi & Persyaratan\n`;
   (d.kualifikasi_list||[]).forEach(k=>{out+=`● ${k.replace(/^[-•●*]\s*/,'').trim()}\n`;});
@@ -842,91 +820,143 @@ function buildCaption(d) {
   return out.trim();
 }
 
-function render(d, p, caption, includePerusahaan) {
-  setF('fJudul', d.judul_lowongan||'—');
-  setF('fPosisi', d.posisi||'—');
-  setF('fJenis', d.jenis_pekerjaan||'Fulltime');
-  setF('fDeadline', d.deadline||'Tidak ada batas waktu');
-  setF('fGajiMin', d.gaji_min?String(d.gaji_min):'0');
-  setF('fGajiMax', d.gaji_max?String(d.gaji_max):'0');
-  setF('fTampilGaji', (d.gaji_min&&d.gaji_min>0)?'Ya':'Tidak');
-  setF('fHubungi', d.hubungi||'Tidak tercantum');
-  setF('fDeskripsi', buildDeskripsi(d));
-  setF('fMeta', `Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. ${d.tipe_kandidat}. Daftar di Loker Arsitek.`);
-  setF('fKeyword', d.keyword_seo||'—');
-  setF('fStatus', 'published');
-  if(posterDriveUrl) showUrlField('fPosterUrl', posterDriveUrl, 'fPosterUrlHint');
-
-  if(includePerusahaan) {
-    setF('pNama', d.nama_perusahaan||'—');
-    setF('pAlamat', p.alamat||'Tidak ditemukan');
-    setF('pKota', d.kota||'—');
-    setF('pProvinsi', p.provinsi||'Tidak ditemukan');
-    setF('pKodepos', p.kodepos||'Tidak ditemukan');
-    setF('pTelepon', p.telepon||'Tidak ditemukan');
-    setF('pEmail', p.email||'Tidak ditemukan');
-    setF('pEmailHrd', d.hubungi||'Tidak tercantum');
-    setF('pWebsite', p.website||'Tidak ditemukan');
-    setF('pJenis', p.jenis_perusahaan||'Swasta');
-    setF('pBidang', p.bidang_usaha||'Arsitektur');
-    setF('pIg', d.akun_ig||'—');
-    setF('pStatus', 'Aktif');
-    if(logoDriveUrl) showUrlField('pLogoUrl', logoDriveUrl, 'pLogoUrlHint');
+function render(d,p,caption,includePerusahaan){
+  setF('fJudul',d.judul_lowongan||'—');
+  setF('fPosisi',d.posisi||'—');
+  setF('fJenis',d.jenis_pekerjaan||'Fulltime');
+  setF('fDeadline',d.deadline||'Tidak ada batas waktu');
+  setF('fGajiMin',d.gaji_min?String(d.gaji_min):'0');
+  setF('fGajiMax',d.gaji_max?String(d.gaji_max):'0');
+  setF('fHubungi',buildContactPerson(d)||'Tidak tercantum');
+  setF('fKualifikasi',buildKualifikasiHtml(d)||'—');
+  setF('fDeskripsi',buildDeskripsi(d));
+  setF('fMeta',`Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. ${d.tipe_kandidat}. Daftar di Loker Arsitek.`);
+  setF('fKeyword',d.keyword_seo||'—');
+  if(posterDriveUrl) showUrlField('fPosterUrl',posterDriveUrl,'fPosterUrlHint');
+  if(includePerusahaan){
+    setF('pNama',d.nama_perusahaan||'—');
+    setF('pAlamat',p.alamat||'Tidak ditemukan');
+    setF('pKota',d.kota||'—');
+    setF('pProvinsi',p.provinsi||'Tidak ditemukan');
+    setF('pTelepon',p.telepon||'Tidak ditemukan');
+    setF('pEmailHrd',d.hubungi||'Tidak tercantum');
+    setF('pWebsite',p.website||'Tidak ditemukan');
+    setF('pIg',d.akun_ig||'—');
+    if(logoDriveUrl) showUrlField('pLogoUrl',logoDriveUrl,'pLogoUrlHint');
   }
-
-  document.getElementById('capFeed').textContent = caption;
+  document.getElementById('capFeed').textContent=caption;
 }
 
-function downloadExcel() {
-  if(!lastData) return;
+// ── SUBMIT TO WEBSITE ──
+async function submitToWebsite() {
+  if (!lastData) { alert('Ekstrak poster dulu.'); return; }
+  if (!apiEndpoint || !apiWebKey) { alert('Isi endpoint dan API key website dulu.'); return; }
+
+  const btn = document.getElementById('btnSubmit');
+  const status = document.getElementById('submitStatus');
+  btn.disabled = true;
+  btn.textContent = '⏳ Mengirim...';
+  status.className = 'submit-status';
+  status.style.display = 'none';
+
   const d = lastData;
-  const p = lastData.perusahaan||{};
-  const wb = XLSX.utils.book_new();
+  const p = lastData.perusahaan || {};
+  const includePerusahaan = lastData.includePerusahaan;
 
-  // Sheet 1 Lowongan
-  const h1 = ['Judul Lowongan','Posisi','Jenis Pekerjaan','Batas Waktu','Gaji Min','Gaji Max','Tampilkan Gaji','Hubungi','Deskripsi','Meta','Keyword','Status','URL Poster'];
-  const r1 = [[d.judul_lowongan||'',d.posisi||'',d.jenis_pekerjaan||'Fulltime',d.deadline||'',d.gaji_min||0,d.gaji_max||0,(d.gaji_min&&d.gaji_min>0)?'Ya':'Tidak',d.hubungi||'',buildDeskripsi(d),`Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. Daftar di Loker Arsitek.`,d.keyword_seo||'','published',posterDriveUrl||'']];
-  const ws1 = XLSX.utils.aoa_to_sheet([h1,...r1]);
-  ws1['!cols'] = [30,20,18,15,12,12,15,25,60,40,30,12,40].map(w=>({wch:w}));
-  XLSX.utils.book_append_sheet(wb, ws1, 'Lowongan');
+  const payload = {
+    // Lowongan
+    judul:           d.judul_lowongan || '',
+    posisi:          d.posisi || '',
+    jenis_pekerjaan: d.jenis_pekerjaan || 'Fulltime',
+    deskripsi:       buildDeskripsi(d),
+    kualifikasi:     buildKualifikasiHtml(d) || null,
+    contact_person:  buildContactPerson(d) || null,
+    gaji_min:        d.gaji_min ? String(d.gaji_min) : null,
+    gaji_max:        d.gaji_max ? String(d.gaji_max) : null,
+    batas_waktu:     d.deadline || null,
+    kota:            d.kota || '',
+    provinsi:        p.provinsi || '',
+    meta:            `Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. ${d.tipe_kandidat||''}. Daftar di Loker Arsitek.`,
+    keyword:         d.keyword_seo || null,
+    gambar:          posterDriveUrl || null,
+    // Perusahaan
+    nama_perusahaan: d.nama_perusahaan || '',
+  };
 
-  // Sheet 2 Perusahaan (hanya kalau toggle ON)
-  if(d.includePerusahaan) {
-    const h2 = ['Nama Perusahaan','Alamat','Kota','Provinsi','Kodepos','Telepon','Email','Email HRD','Website','Jenis Perusahaan','Bidang Usaha','Instagram','Status','URL Logo'];
-    const r2 = [[d.nama_perusahaan||'',p.alamat||'',d.kota||'',p.provinsi||'',p.kodepos||'',p.telepon||'',p.email||'',d.hubungi||'',p.website||'',p.jenis_perusahaan||'Swasta',p.bidang_usaha||'Arsitektur',d.akun_ig||'','Aktif',logoDriveUrl||'']];
-    const ws2 = XLSX.utils.aoa_to_sheet([h2,...r2]);
-    ws2['!cols'] = [25,40,20,20,10,18,30,30,30,18,25,20,10,40].map(w=>({wch:w}));
-    XLSX.utils.book_append_sheet(wb, ws2, 'Perusahaan');
+  // Tambah data perusahaan kalau toggle ON
+  if (includePerusahaan) {
+    payload.p_alamat   = p.alamat || null;
+    payload.p_kabkota  = d.kota || null;
+    payload.p_provinsi = p.provinsi || null;
+    payload.p_kodepos  = p.kodepos || null;
+    payload.p_telepon  = p.telepon || null;
+    payload.p_email    = p.email || null;
+    payload.p_email_hrd = d.hubungi || null;
+    payload.p_website  = p.website || null;
+    payload.p_instagram = d.akun_ig || null;
+    payload.p_jenis    = p.jenis_perusahaan || 'swasta';
+    payload.p_bidang   = p.bidang_usaha || 'Arsitektur';
+    payload.p_logo     = logoDriveUrl || null;
   }
 
+  try {
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiWebKey,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      const url = data.data?.lowongan?.url || '';
+      const pStatus = data.data?.perusahaan?.status === 'created' ? '(perusahaan baru dibuat)' : '(perusahaan sudah ada)';
+      status.className = 'submit-status ok';
+      status.innerHTML = `✅ Berhasil! ${pStatus}<br><a href="${url}" target="_blank" class="submit-link">🔗 Lihat lowongan →</a>`;
+      btn.textContent = '✅ Berhasil Ditambahkan';
+    } else {
+      status.className = 'submit-status err';
+      status.textContent = '❌ ' + (data.message || JSON.stringify(data));
+      btn.disabled = false;
+      btn.textContent = '🚀 Tambahkan ke Website';
+    }
+  } catch(e) {
+    status.className = 'submit-status err';
+    status.textContent = '❌ Error: ' + e.message;
+    btn.disabled = false;
+    btn.textContent = '🚀 Tambahkan ke Website';
+  }
+}
+
+// ── EXCEL ──
+function downloadExcel(){
+  if(!lastData) return;
+  const d=lastData,p=lastData.perusahaan||{};
+  const wb=XLSX.utils.book_new();
+  const h1=['Judul Lowongan','Posisi','Jenis Pekerjaan','Batas Waktu','Gaji Min','Gaji Max','Contact Person','Kualifikasi','Deskripsi','Meta','Keyword','Status','URL Poster'];
+  const r1=[[d.judul_lowongan||'',d.posisi||'',d.jenis_pekerjaan||'Fulltime',d.deadline||'',d.gaji_min||0,d.gaji_max||0,buildContactPerson(d),buildKualifikasiHtml(d),buildDeskripsi(d),`Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. Daftar di Loker Arsitek.`,d.keyword_seo||'','published',posterDriveUrl||'']];
+  const ws1=XLSX.utils.aoa_to_sheet([h1,...r1]);
+  ws1['!cols']=[30,20,18,15,12,12,25,40,60,40,30,12,40].map(w=>({wch:w}));
+  XLSX.utils.book_append_sheet(wb,ws1,'Lowongan');
+  if(d.includePerusahaan){
+    const h2=['Nama Perusahaan','Alamat','Kota','Provinsi','Kodepos','Telepon','Email HRD','Website','Jenis Perusahaan','Bidang Usaha','Instagram','Status','URL Logo'];
+    const r2=[[d.nama_perusahaan||'',p.alamat||'',d.kota||'',p.provinsi||'',p.kodepos||'',p.telepon||'',d.hubungi||'',p.website||'',p.jenis_perusahaan||'Swasta',p.bidang_usaha||'Arsitektur',d.akun_ig||'','Aktif',logoDriveUrl||'']];
+    const ws2=XLSX.utils.aoa_to_sheet([h2,...r2]);
+    ws2['!cols']=[25,40,20,20,10,18,30,30,18,25,20,10,40].map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb,ws2,'Perusahaan');
+  }
   const nama=(d.nama_perusahaan||'loker').replace(/\s/g,'-').toLowerCase();
   const posisi=(d.posisi||'posisi').replace(/\s/g,'-').toLowerCase();
-  XLSX.writeFile(wb, `loker-${posisi}-${nama}.xlsx`);
+  XLSX.writeFile(wb,`loker-${posisi}-${nama}.xlsx`);
 }
 
-function setF(id,val) {
-  const el=document.getElementById(id); if(!el) return;
-  const btn=el.querySelector('.cbtn');
-  el.textContent=val;
-  if(btn) el.appendChild(btn);
-}
-function cp(id,btn) {
-  const el=document.getElementById(id);
-  let t=''; el.childNodes.forEach(n=>{if(n.nodeType===3)t+=n.textContent;});
-  navigator.clipboard.writeText(t.trim()).then(()=>{btn.textContent='✓';btn.classList.add('ok');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('ok');},2000);});
-}
-function cpUrl(id,btn) {
-  const el=document.getElementById(id);
-  let t=''; el.childNodes.forEach(n=>{if(n.nodeType===3)t+=n.textContent;});
-  navigator.clipboard.writeText(t.trim()).then(()=>{btn.textContent='✓';btn.classList.add('ok');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('ok');},2000);});
-}
-function cpCap() {
-  const btn=document.getElementById('btnCopyCap');
-  navigator.clipboard.writeText(document.getElementById('capFeed').textContent).then(()=>{
-    btn.textContent='✓ Tersalin!';btn.classList.add('ok');
-    setTimeout(()=>{btn.textContent='Copy Caption';btn.classList.remove('ok');},2000);
-  });
-}
+function setF(id,val){const el=document.getElementById(id);if(!el)return;const btn=el.querySelector('.cbtn');el.textContent=val;if(btn)el.appendChild(btn);}
+function cp(id,btn){const el=document.getElementById(id);let t='';el.childNodes.forEach(n=>{if(n.nodeType===3)t+=n.textContent;});navigator.clipboard.writeText(t.trim()).then(()=>{btn.textContent='✓';btn.classList.add('ok');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('ok');},2000);});}
+function cpUrl(id,btn){const el=document.getElementById(id);let t='';el.childNodes.forEach(n=>{if(n.nodeType===3)t+=n.textContent;});navigator.clipboard.writeText(t.trim()).then(()=>{btn.textContent='✓';btn.classList.add('ok');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('ok');},2000);});}
+function cpCap(){const btn=document.getElementById('btnCopyCap');navigator.clipboard.writeText(document.getElementById('capFeed').textContent).then(()=>{btn.textContent='✓ Tersalin!';btn.classList.add('ok');setTimeout(()=>{btn.textContent='Copy Caption';btn.classList.remove('ok');},2000);});}
 function showLoad(t){document.getElementById('loadBox').style.display='block';document.getElementById('loadTxt').textContent=t;document.getElementById('btnProses').disabled=true;document.getElementById('outputWrap').style.display='none';}
 function hideLoad(){document.getElementById('loadBox').style.display='none';document.getElementById('btnProses').disabled=false;}
 function setLoad(t){document.getElementById('loadTxt').textContent=t;}
