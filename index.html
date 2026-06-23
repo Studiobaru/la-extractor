@@ -441,22 +441,132 @@ let posterDriveUrl = null, logoDriveUrl = null;
 let driveClient = null, driveFolderId = null;
 let apiEndpoint = '', apiWebKey = '';
 
-// ── UMR 2026 ──
+// ── UMK 2026 (sumber: SK Gubernur masing-masing provinsi) ──
 const UMR = {
-  'jakarta':5396761,'dki jakarta':5396761,'surabaya':4961392,'sidoarjo':4961392,
-  'bandung':4482914,'semarang':3454827,'yogyakarta':2465954,'jogja':2465954,
-  'sleman':2465954,'bantul':2465954,'medan':3769318,'makassar':3800000,
-  'denpasar':3096000,'bali':3096000,'malang':3368000,'solo':2269460,
-  'bekasi':5691583,'tangerang':4590000,'tangsel':4590000,'depok':5195721,
-  'bogor':4813988,'palembang':3800000,'balikpapan':3500000,'samarinda':3200000,
-  'pekanbaru':3294625,'batam':4381172,'manado':3600000,'pontianak':3000000,
-  'banjarmasin':3282812,'padang':2994031,'lampung':2893069,'cirebon':2685560,
+  // DKI Jakarta
+  'jakarta':5396761,'dki jakarta':5396761,
+  // Jawa Barat
+  'bekasi kota':5999443,'kota bekasi':5999443,
+  'karawang':5886853,'bekasi kabupaten':5938885,'kab bekasi':5938885,
+  'purwakarta':5052856,'subang':3737482,
+  'depok':5522662,'kota depok':5522662,
+  'bogor kota':5437203,'kota bogor':5437203,
+  'bogor kabupaten':5161769,'kab bogor':5161769,'bogor':5161769,
+  'sukabumi kabupaten':3831926,'sukabumi kota':3192807,'sukabumi':3192807,
+  'cianjur':3316191,
+  'bandung kota':4737678,'kota bandung':4737678,'bandung':4737678,
+  'cimahi':4090568,
+  'bandung barat':3984711,'bandung kabupaten':3972202,'kab bandung':3972202,
+  'sumedang':3949856,'indramayu':2910254,
+  'cirebon kota':2878646,'kota cirebon':2878646,'cirebon':2878646,
+  'majalengka':2595368,'kuningan':2369380,
+  'tasikmalaya kota':2980336,'tasikmalaya':2871874,
+  'garut':2472227,'ciamis':2373644,'pangandaran':2351250,'banjar':2361241,
+  // Banten
+  'tangerang kabupaten':5210377,'kab tangerang':5210377,
+  'serang kabupaten':5178521,'kab serang':5178521,
+  'tangerang kota':5399405,'kota tangerang':5399405,'tangerang':5399405,
+  'cilegon':5469922,
+  'serang kota':4665927,'kota serang':4665927,'serang':4665927,
+  'tangerang selatan':5247870,'tangsel':5247870,'tangsel kota':5247870,
+  'pandeglang':3360078,'lebak':3330010,
+  // Jawa Tengah
+  'cilacap':2773184,'banyumas':2474598,'purbalingga':2474721,'banjarnegara':2327813,
+  'kebumen':2400000,'purworejo':2401961,'wonosobo':2455038,
+  'magelang kabupaten':2607790,'magelang kota':2429285,'magelang':2429285,
+  'boyolali':2537949,'klaten':2538691,'sukoharjo':2500000,'wonogiri':2335126,
+  'karanganyar':2592154,'sragen':2337700,'grobogan':2399186,'blora':2345695,
+  'rembang':2386305,'pati':2485000,'kudus':2818585,'jepara':2756501,
+  'demak':3122805,'semarang kabupaten':2940088,'kab semarang':2940088,
+  'temanggung':2397000,'kendal':2992994,'batang':2708520,
+  'pekalongan kabupaten':2633700,'pekalongan kota':2700926,'pekalongan':2700926,
+  'pemalang':2433254,'tegal kabupaten':2484162,'tegal kota':2526510,'tegal':2526510,
+  'brebes':2400350,
+  'surakarta':2570000,'solo':2570000,'salatiga':2698273,
+  'semarang kota':3701709,'kota semarang':3701709,'semarang':3701709,
+  // DIY
+  'yogyakarta':2827593,'jogja':2827593,'kota yogyakarta':2827593,
+  'sleman':2624387,'bantul':2509001,'kulon progo':2504520,'kulonprogo':2504520,
+  'gunungkidul':2468378,'gunung kidul':2468378,
+  // Jawa Timur
+  'surabaya':5288796,'kota surabaya':5288796,
+  'gresik':5195401,'sidoarjo':5191541,
+  'pasuruan kabupaten':5187681,'kab pasuruan':5187681,
+  'mojokerto kabupaten':5176101,'kab mojokerto':5176101,
+  'malang kabupaten':3802862,'kab malang':3802862,
+  'malang kota':3736101,'kota malang':3736101,'malang':3736101,
+  'batu':3562484,'pasuruan kota':3555301,'kota pasuruan':3555301,
+  'jombang':3320770,'tuban':3229092,
+  'mojokerto kota':3208556,'kota mojokerto':3208556,
+  'lamongan':3196328,'probolinggo kabupaten':3164526,'kab probolinggo':3164526,
+  'probolinggo kota':3045172,'kota probolinggo':3045172,
+  'jember':3012197,'banyuwangi':2989145,
+  'kediri kota':2742806,'kota kediri':2742806,'kediri':2742806,
+  'bojonegoro':2685983,'tulungagung':2628190,
+  'madiun kota':2588794,'kota madiun':2588794,'madiun':2553221,
+  'lumajang':2578320,'blitar kabupaten':2567744,'blitar kota':2639518,'blitar':2639518,
+  'nganjuk':2564627,'ngawi':2556815,'magetan':2553866,'sumenep':2553688,
+  'bangkalan':2550274,'ponorogo':2549876,'trenggalek':2530313,
+  'pamekasan':2528004,'pacitan':2514892,'bondowoso':2496886,
+  'sampang':2484443,'situbondo':2483962,
+  // Bali
+  'badung':3791002,'denpasar':3499878,'kota denpasar':3499878,
+  'gianyar':3316798,'tabanan':3287678,'bali':3499878,
+  // Kepri
+  'batam':5357982,'tanjungpinang':3879520,'bintan':4583221,
+  // Riau
+  'pekanbaru':3998179,'dumai':4431174,'kampar':3819353,
+  'bengkalis':4155317,'siak':4001327,'pelalawan':3894260,
+  // Sulsel
+  'makassar':4148179,
+  // Sulteng
+  'palu':3619466,
+  // Kalsel
+  'banjarmasin':3855894,'banjarbaru':3843037,
+  // Sumut
+  'medan':3769318,
+  // Default fallback
+  'bekasi':5999443,
 };
 function getUMR(kota) {
   if (!kota) return 3000000;
   const k = kota.toLowerCase().trim();
   for (const [key, val] of Object.entries(UMR)) { if (k.includes(key)||key.includes(k)) return val; }
   return 3000000;
+}
+
+// Mapping kota → provinsi untuk fallback
+const KOTA_PROVINSI = {
+  'jakarta':'DKI JAKARTA','bekasi':'JAWA BARAT','depok':'JAWA BARAT','bogor':'JAWA BARAT',
+  'bandung':'JAWA BARAT','cimahi':'JAWA BARAT','sukabumi':'JAWA BARAT','cianjur':'JAWA BARAT',
+  'cirebon':'JAWA BARAT','tasikmalaya':'JAWA BARAT','garut':'JAWA BARAT','karawang':'JAWA BARAT',
+  'purwakarta':'JAWA BARAT','subang':'JAWA BARAT','indramayu':'JAWA BARAT','majalengka':'JAWA BARAT',
+  'kuningan':'JAWA BARAT','ciamis':'JAWA BARAT','pangandaran':'JAWA BARAT','banjar':'JAWA BARAT',
+  'tangerang':'BANTEN','serang':'BANTEN','cilegon':'BANTEN','pandeglang':'BANTEN','lebak':'BANTEN',
+  'tangsel':'BANTEN','tangerang selatan':'BANTEN',
+  'semarang':'JAWA TENGAH','solo':'JAWA TENGAH','surakarta':'JAWA TENGAH','salatiga':'JAWA TENGAH',
+  'magelang':'JAWA TENGAH','pekalongan':'JAWA TENGAH','tegal':'JAWA TENGAH','cilacap':'JAWA TENGAH',
+  'banyumas':'JAWA TENGAH','kudus':'JAWA TENGAH','jepara':'JAWA TENGAH','demak':'JAWA TENGAH',
+  'kendal':'JAWA TENGAH','batang':'JAWA TENGAH','brebes':'JAWA TENGAH','rembang':'JAWA TENGAH',
+  'yogyakarta':'DAERAH ISTIMEWA YOGYAKARTA','jogja':'DAERAH ISTIMEWA YOGYAKARTA',
+  'sleman':'DAERAH ISTIMEWA YOGYAKARTA','bantul':'DAERAH ISTIMEWA YOGYAKARTA',
+  'kulonprogo':'DAERAH ISTIMEWA YOGYAKARTA','gunungkidul':'DAERAH ISTIMEWA YOGYAKARTA',
+  'surabaya':'JAWA TIMUR','malang':'JAWA TIMUR','sidoarjo':'JAWA TIMUR','gresik':'JAWA TIMUR',
+  'mojokerto':'JAWA TIMUR','pasuruan':'JAWA TIMUR','kediri':'JAWA TIMUR','blitar':'JAWA TIMUR',
+  'madiun':'JAWA TIMUR','jember':'JAWA TIMUR','banyuwangi':'JAWA TIMUR','probolinggo':'JAWA TIMUR',
+  'tuban':'JAWA TIMUR','lamongan':'JAWA TIMUR','bojonegoro':'JAWA TIMUR','jombang':'JAWA TIMUR',
+  'denpasar':'BALI','badung':'BALI','gianyar':'BALI','tabanan':'BALI','bali':'BALI',
+  'medan':'SUMATERA UTARA','batam':'KEPULAUAN RIAU','pekanbaru':'RIAU','dumai':'RIAU',
+  'makassar':'SULAWESI SELATAN','palu':'SULAWESI TENGAH',
+  'banjarmasin':'KALIMANTAN SELATAN','banjarbaru':'KALIMANTAN SELATAN',
+};
+function getProvinsiFromKota(kota) {
+  if (!kota) return '';
+  const k = kota.toLowerCase().trim();
+  for (const [key, prov] of Object.entries(KOTA_PROVINSI)) {
+    if (k.includes(key) || key.includes(k)) return prov;
+  }
+  return '';
 }
 
 // ── GOOGLE DRIVE ──
@@ -688,14 +798,35 @@ async function proses() {
   try {
     setLoad('Menganalisis poster...');
     const data=await extractPoster();
+
+    // Gaji — pakai UMK kalau poster tidak ada gaji
     if(!data.gaji_min||data.gaji_min===0){
       const umr=getUMR(data.kota);
       data.gaji_min=Math.round(umr*0.95/100000)*100000;
       data.gaji_max=Math.round(umr*1.05/100000)*100000;
       data.gaji_dari_umr=true;
     }
+
+    // Provinsi — fallback dari lookup kota jika GPT tidak ekstrak
+    if (!data.provinsi || !data.provinsi.trim()) {
+      data.provinsi = getProvinsiFromKota(data.kota || '');
+    }
+
+    // Deadline — default 30 hari dari sekarang kalau tidak ada
+    if (!data.deadline || !data.deadline.trim()) {
+      const d = new Date(); d.setDate(d.getDate()+30);
+      data.deadline = `${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}/${d.getFullYear()}`;
+      data.deadline_default = true;
+    }
+
     let perusahaan={};
     if(includePerusahaan){setLoad('Mencari data perusahaan...');perusahaan=await searchPerusahaan(data);}
+
+    // Ambil provinsi dari hasil search perusahaan jika lebih lengkap
+    if (perusahaan.provinsi && perusahaan.provinsi.trim()) {
+      data.provinsi = perusahaan.provinsi.trim().toUpperCase();
+    }
+
     const caption=buildCaption(data);
     lastData={...data,perusahaan,includePerusahaan};
     render(data,perusahaan,caption,includePerusahaan);
@@ -713,29 +844,30 @@ async function extractPoster() {
   const prompt=`Kamu asisten portal lowongan kerja arsitektur Indonesia "Loker Arsitek".
 Analisis poster ini, ekstrak semua data sebagai JSON valid:
 {
-  "judul_lowongan": "Judul SEO-friendly",
-  "posisi": "Nama posisi singkat",
+  "judul_lowongan": "Lowongan [Posisi] di [Nama Perusahaan] [Kota] — maksimal 70 karakter, SEO-friendly",
+  "posisi": "Nama posisi singkat, contoh: Arsitek / Interior Designer / Drafter",
   "jenis_pekerjaan": "Fulltime / Parttime / Freelance / Magang",
-  "deadline": "MM/DD/YYYY jika ada atau kosong",
-  "gaji_min": angka integer atau 0,
-  "gaji_max": angka integer atau 0,
+  "deadline": "MM/DD/YYYY jika ada di poster, kosong jika tidak ada",
+  "gaji_min": angka integer atau 0 (jika tidak ada di poster),
+  "gaji_max": angka integer atau 0 (jika tidak ada di poster),
   "gaji_label": "teks gaji di poster atau kosong",
-  "hubungi": "email atau WA atau kosong",
-  "nama_perusahaan": "nama perusahaan/studio",
-  "kota": "kota lokasi kerja",
-  "akun_ig": "akun IG dengan @ atau kosong",
+  "hubungi": "email atau nomor WA dari poster atau kosong",
+  "nama_perusahaan": "nama perusahaan/studio arsitektur",
+  "kota": "nama kota lokasi kerja saja, tanpa provinsi",
+  "provinsi": "nama provinsi lokasi kerja, contoh: JAWA BARAT / DKI JAKARTA / BALI",
+  "akun_ig": "akun Instagram dengan @ atau kosong",
   "tipe_kandidat": "Fresh Graduate / Berpengalaman / Keduanya",
   "lokasi_kerja": "WFO / WFH / Hybrid",
   "urgently": true atau false,
-  "teks_posisi_poster": "salin PERSIS teks deskripsi posisi dari poster",
-  "deskripsi_perusahaan": "deskripsi perusahaan dari poster atau kosong",
-  "kualifikasi_list": ["poin 1","poin 2"],
-  "cara_melamar_teks": "cara melamar selain email/format subjek",
-  "persyaratan_berkas": "persyaratan berkas atau kosong",
-  "format_subjek_email": "format subjek email atau kosong",
-  "keyword_seo": "3-5 kata kunci SEO pisah koma"
+  "teks_posisi_poster": "salin headline/tagline utama dari poster, maksimal 2 kalimat pendek",
+  "deskripsi_perusahaan": "deskripsi singkat perusahaan dari poster, 1-2 kalimat, atau kosong",
+  "kualifikasi_list": ["poin kualifikasi 1","poin kualifikasi 2"],
+  "cara_melamar_teks": "cara melamar selain email — misal kirim WA ke xxx, atau kosong",
+  "persyaratan_berkas": "dokumen yang harus dikirim, misal: CV, Portfolio, atau kosong",
+  "format_subjek_email": "format subjek email jika ada di poster, atau kosong",
+  "keyword_seo": "3-5 kata kunci SEO relevan pisah koma, contoh: loker arsitek bandung, lowongan interior designer"
 }
-Respond HANYA dengan JSON valid.`;
+Respond HANYA dengan JSON valid, tanpa penjelasan apapun.`;
   const res=await callAPI({model:'gpt-4.1',max_tokens:2000,
     messages:[{role:'user',content:[
       {type:'image_url',image_url:{url:'data:image/jpeg;base64,'+imgB64,detail:'high'}},
@@ -778,17 +910,38 @@ function buildKualifikasiHtml(d) {
 }
 
 function buildDeskripsi(d) {
-  let out=(d.deskripsi_perusahaan&&d.deskripsi_perusahaan.trim())?d.deskripsi_perusahaan.trim()+'\n\n':`${d.nama_perusahaan} sedang membuka lowongan untuk posisi ${d.posisi}.\n\n`;
-  out+=`Kualifikasi & Persyaratan\n`;
-  (d.kualifikasi_list||[]).forEach(k=>{out+=`● ${k.replace(/^[-•●*]\s*/,'').trim()}\n`;});
-  if(d.persyaratan_berkas&&d.persyaratan_berkas.trim()) out+=`\nPersyaratan Berkas\n${d.persyaratan_berkas.trim()}\n`;
-  out+=`\nCara Melamar\nTertarik bergabung? Klik tombol "Lamar Sekarang" yang tersedia di halaman ini, atau kirimkan CV dan portofolio terbaik kamu ke:\n`;
-  if(d.cara_melamar_teks&&d.cara_melamar_teks.trim()) out+=`${d.cara_melamar_teks.trim()}\n`;
-  if(d.hubungi) out+=`● Email: ${d.hubungi}\n`;
-  if(d.format_subjek_email) out+=`● Format subjek: ${d.format_subjek_email}\n`;
-  out+=`\nInformasi Perusahaan\n${d.nama_perusahaan}`;
-  if(d.kota) out+=` · ${d.kota}`;
-  if(d.akun_ig) out+=` · ${d.akun_ig}`;
+  // Intro perusahaan
+  const intro = (d.deskripsi_perusahaan && d.deskripsi_perusahaan.trim())
+    ? d.deskripsi_perusahaan.trim()
+    : `<strong>${d.nama_perusahaan}</strong> membuka lowongan untuk posisi <strong>${d.posisi}</strong>${d.kota ? ' di ' + d.kota : ''}.`;
+  let out = `<p>${intro}</p>\n\n`;
+
+  // Kualifikasi (tidak duplikat dari field kualifikasi — tapi tetap ada di deskripsi untuk SEO)
+  if (d.kualifikasi_list && d.kualifikasi_list.length) {
+    out += `<h3>Kualifikasi &amp; Persyaratan</h3>\n<ul>\n`;
+    d.kualifikasi_list.forEach(k => { out += `<li>${k.replace(/^[-•●*]\s*/,'').trim()}</li>\n`; });
+    out += `</ul>\n\n`;
+  }
+
+  // Persyaratan berkas
+  if (d.persyaratan_berkas && d.persyaratan_berkas.trim()) {
+    out += `<h3>Persyaratan Berkas</h3>\n<p>${d.persyaratan_berkas.trim()}</p>\n\n`;
+  }
+
+  // Cara melamar
+  out += `<h3>Cara Melamar</h3>\n`;
+  out += `<p>Tertarik bergabung? Klik tombol <strong>"Lamar Sekarang"</strong> di halaman ini atau kirimkan lamaran ke:</p>\n<ul>\n`;
+  if (d.cara_melamar_teks && d.cara_melamar_teks.trim()) out += `<li>${d.cara_melamar_teks.trim()}</li>\n`;
+  if (d.hubungi) out += `<li>Email: ${d.hubungi}</li>\n`;
+  if (d.format_subjek_email) out += `<li>Format subjek: ${d.format_subjek_email}</li>\n`;
+  out += `</ul>\n\n`;
+
+  // Info perusahaan
+  out += `<h3>Informasi Perusahaan</h3>\n<p>${d.nama_perusahaan}`;
+  if (d.kota) out += ` &middot; ${d.kota}`;
+  if (d.akun_ig) out += ` &middot; ${d.akun_ig}`;
+  out += `</p>`;
+
   return out.trim();
 }
 
@@ -801,22 +954,41 @@ function buildContactPerson(d) {
 }
 
 function buildCaption(d) {
-  const urgent=d.urgently?'🚨 ':'';
-  let out=`${urgent}● ${d.kota}\n\n`;
-  if(d.teks_posisi_poster&&d.teks_posisi_poster.trim()) out+=`${d.teks_posisi_poster.trim()}\n\n`;
-  out+=`Kualifikasi & Persyaratan\n`;
-  (d.kualifikasi_list||[]).forEach(k=>{out+=`● ${k.replace(/^[-•●*]\s*/,'').trim()}\n`;});
-  out+=`\nCara Melamar\n`;
-  if(d.cara_melamar_teks&&d.cara_melamar_teks.trim()) out+=`${d.cara_melamar_teks.trim()}\n`;
-  if(d.hubungi) out+=`● Email: ${d.hubungi}\n`;
-  if(d.format_subjek_email) out+=`● Format subjek: ${d.format_subjek_email}\n`;
-  out+=`\nInformasi Perusahaan\n${d.nama_perusahaan}`;
-  if(d.kota) out+=` · ${d.kota}`;
-  if(d.akun_ig) out+=` · ${d.akun_ig}`;
-  const kota=(d.kota||'indonesia').toLowerCase().replace(/\s/g,'');
-  const posisi=(d.posisi||'arsitek').toLowerCase().replace(/\s/g,'');
-  out+=`\n\n#loker${posisi} #lowongan${posisi} #loker${kota} #lokerarsitek #arsitekturindonesia`;
-  if(d.akun_ig) out+=`\n${d.akun_ig}`;
+  const urgent = d.urgently ? '🚨 URGENTLY NEEDED\n\n' : '';
+  const posisiUpper = (d.posisi || '').toUpperCase();
+  const lokasiIcon = d.lokasi_kerja === 'WFH' ? '🏠 WFH' : d.lokasi_kerja === 'Hybrid' ? '🏠/🏢 Hybrid' : '📍 ' + (d.kota || 'Indonesia');
+
+  let out = `${urgent}${lokasiIcon}\n\n`;
+
+  // Teks dari poster (tagline/headline)
+  if (d.teks_posisi_poster && d.teks_posisi_poster.trim()) {
+    out += `${d.teks_posisi_poster.trim()}\n\n`;
+  }
+
+  // Kualifikasi — ringkas, max 5 poin
+  const kualList = (d.kualifikasi_list || []).slice(0, 5);
+  if (kualList.length) {
+    out += `📋 Kualifikasi\n`;
+    kualList.forEach(k => { out += `● ${k.replace(/^[-•●*]\s*/,'').trim()}\n`; });
+    out += '\n';
+  }
+
+  // Cara melamar
+  out += `📩 Cara Melamar\n`;
+  if (d.cara_melamar_teks && d.cara_melamar_teks.trim()) out += `${d.cara_melamar_teks.trim()}\n`;
+  if (d.hubungi) out += `● ${d.hubungi}\n`;
+  if (d.format_subjek_email) out += `● Subjek: ${d.format_subjek_email}\n`;
+
+  // Info perusahaan singkat
+  out += `\n🏢 ${d.nama_perusahaan}`;
+  if (d.akun_ig) out += ` ${d.akun_ig}`;
+
+  // Hashtag
+  const kota = (d.kota || 'indonesia').toLowerCase().replace(/\s+/g,'');
+  const posisi = (d.posisi || 'arsitek').toLowerCase().replace(/\s+/g,'');
+  const jenis = (d.jenis_pekerjaan || '').toLowerCase().includes('magang') ? ' #magangangarsitek' : '';
+  out += `\n\n#loker${posisi} #lowongan${posisi} #loker${kota} #lokerarsitek #arsitekturindonesia${jenis}`;
+
   return out.trim();
 }
 
@@ -824,20 +996,20 @@ function render(d,p,caption,includePerusahaan){
   setF('fJudul',d.judul_lowongan||'—');
   setF('fPosisi',d.posisi||'—');
   setF('fJenis',d.jenis_pekerjaan||'Fulltime');
-  setF('fDeadline',d.deadline||'Tidak ada batas waktu');
-  setF('fGajiMin',d.gaji_min?String(d.gaji_min):'0');
-  setF('fGajiMax',d.gaji_max?String(d.gaji_max):'0');
+  setF('fDeadline',d.deadline||(d.deadline_default?'30 hari dari sekarang':'Tidak ada batas waktu'));
+  setF('fGajiMin',d.gaji_min?(formatGajiStr(d.gaji_min)+(d.gaji_dari_umr?' (estimasi UMR)':'')):'0');
+  setF('fGajiMax',d.gaji_max?(formatGajiStr(d.gaji_max)+(d.gaji_dari_umr?' (estimasi UMR)':'')):'0');
   setF('fHubungi',buildContactPerson(d)||'Tidak tercantum');
   setF('fKualifikasi',buildKualifikasiHtml(d)||'—');
   setF('fDeskripsi',buildDeskripsi(d));
-  setF('fMeta',`Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. ${d.tipe_kandidat}. Daftar di Loker Arsitek.`);
+  setF('fMeta',`Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. ${d.tipe_kandidat||''}. Daftar di Loker Arsitek.`);
   setF('fKeyword',d.keyword_seo||'—');
   if(posterDriveUrl) showUrlField('fPosterUrl',posterDriveUrl,'fPosterUrlHint');
   if(includePerusahaan){
     setF('pNama',d.nama_perusahaan||'—');
     setF('pAlamat',p.alamat||'Tidak ditemukan');
     setF('pKota',d.kota||'—');
-    setF('pProvinsi',p.provinsi||'Tidak ditemukan');
+    setF('pProvinsi',d.provinsi||p.provinsi||'Tidak ditemukan');
     setF('pTelepon',p.telepon||'Tidak ditemukan');
     setF('pEmailHrd',d.hubungi||'Tidak tercantum');
     setF('pWebsite',p.website||'Tidak ditemukan');
@@ -871,11 +1043,11 @@ async function submitToWebsite() {
     deskripsi:       buildDeskripsi(d),
     kualifikasi:     buildKualifikasiHtml(d) || null,
     contact_person:  buildContactPerson(d) || null,
-    gaji_min:        d.gaji_min ? String(d.gaji_min) : null,
-    gaji_max:        d.gaji_max ? String(d.gaji_max) : null,
+    gaji_min:        d.gaji_min ? formatGajiStr(d.gaji_min) : null,
+    gaji_max:        d.gaji_max ? formatGajiStr(d.gaji_max) : null,
     batas_waktu:     d.deadline || null,
     kota:            d.kota || '',
-    provinsi:        p.provinsi || '',
+    provinsi:        d.provinsi || '',
     meta:            `Lowongan ${d.posisi} di ${d.nama_perusahaan}, ${d.kota}. ${d.tipe_kandidat||''}. Daftar di Loker Arsitek.`,
     keyword:         d.keyword_seo || null,
     gambar:          posterDriveUrl || null,
@@ -951,6 +1123,13 @@ function downloadExcel(){
   const nama=(d.nama_perusahaan||'loker').replace(/\s/g,'-').toLowerCase();
   const posisi=(d.posisi||'posisi').replace(/\s/g,'-').toLowerCase();
   XLSX.writeFile(wb,`loker-${posisi}-${nama}.xlsx`);
+}
+
+function formatGajiStr(val) {
+  if (!val) return null;
+  const n = parseInt(String(val).replace(/[^0-9]/g,''));
+  if (!n) return null;
+  return n.toLocaleString('id-ID');
 }
 
 function setF(id,val){const el=document.getElementById(id);if(!el)return;const btn=el.querySelector('.cbtn');el.textContent=val;if(btn)el.appendChild(btn);}
