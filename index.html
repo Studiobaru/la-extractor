@@ -72,6 +72,25 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .aw-status.ok { background: var(--success-lt); color: var(--success); display: block; }
 .aw-status.err { background: var(--danger-lt); color: var(--danger); display: block; }
 
+/* PERUSAHAAN PICKER */
+.prs-wrap { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; margin-bottom: 14px; }
+.prs-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.prs-search-wrap { position: relative; margin-bottom: 8px; }
+.prs-search-wrap svg { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.prs-input { width: 100%; padding: 9px 10px 9px 30px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-family: inherit; outline: none; }
+.prs-input:focus { border-color: var(--teal); }
+.prs-results { max-height: 180px; overflow-y: auto; border: 1.5px solid var(--border); border-radius: var(--radius-sm); display: none; }
+.prs-item { padding: 9px 12px; font-size: 12.5px; cursor: pointer; border-bottom: 1px solid var(--border); }
+.prs-item:last-child { border-bottom: none; }
+.prs-item:hover { background: var(--teal-lt); }
+.prs-item .prs-nama { font-weight: 700; color: var(--text); }
+.prs-item .prs-kota { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.prs-selected { background: var(--success-lt); border: 1.5px solid var(--success); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12.5px; display: none; align-items: center; justify-content: space-between; gap: 8px; }
+.prs-selected .prs-sel-nama { font-weight: 700; color: var(--success); }
+.prs-selected .prs-sel-clear { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0; }
+.prs-hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
+.prs-new-badge { display: inline-block; background: var(--amber-lt); color: var(--amber); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 6px; }
+
 /* UPLOAD */
 .upload-area { border: 2px dashed var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; }
 .upload-area.drag { border-color: var(--teal); background: var(--teal-lt); }
@@ -162,8 +181,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 <div class="header">
   <div class="logo">LA</div>
   <div>
-    <div class="header-title">Poster Extractor</div>
-    <div class="header-sub">Auto-isi form lowongan dari foto poster</div>
+    <div class="header-title">Poster Extractor <span style="font-size:10px;font-weight:500;opacity:0.6;letter-spacing:0.5px">v2.5</span></div>
+    <div class="header-sub">Auto-isi form lowongan dari foto poster · Update 24 Jun 2026</div>
   </div>
 </div>
 
@@ -249,6 +268,27 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <div class="drive-upload-status" id="posterDriveStatus"></div>
       </div>
     </div>
+  </div>
+
+  <!-- PERUSAHAAN PICKER -->
+  <div class="prs-wrap">
+    <div class="prs-title">
+      🏢 Pilih Perusahaan
+      <span id="prsNewBadge" class="prs-new-badge" style="display:none">Baru</span>
+    </div>
+    <div class="prs-search-wrap">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" class="prs-input" id="prsSearch" placeholder="Ketik nama perusahaan untuk mencari..." oninput="searchPerusahaanDB(this.value)" autocomplete="off">
+    </div>
+    <div class="prs-results" id="prsResults"></div>
+    <div class="prs-selected" id="prsSelected">
+      <div>
+        <div class="prs-sel-nama" id="prsSelNama">—</div>
+        <div style="font-size:11px;color:var(--muted)" id="prsSelKota"></div>
+      </div>
+      <button class="prs-sel-clear" onclick="clearPerusahaan()" title="Ganti perusahaan">✕</button>
+    </div>
+    <div class="prs-hint" id="prsHint">Cari perusahaan yang sudah terdaftar di website. Jika belum ada, aktifkan toggle di bawah.</div>
   </div>
 
   <!-- TOGGLE PERUSAHAAN -->
@@ -440,6 +480,8 @@ let lastData = null, gdriveToken = null;
 let posterDriveUrl = null, logoDriveUrl = null;
 let driveClient = null, driveFolderId = null;
 let apiEndpoint = '', apiWebKey = '';
+let selectedPerusahaan = null; // { id, nama_perusahaan, slug, kabkota, provinsi }
+let prsSearchTimeout = null;
 
 // ── UMK 2026 (sumber: SK Gubernur masing-masing provinsi) ──
 const UMR = {
@@ -663,6 +705,62 @@ function showAwStatus(type, msg) {
   el.textContent = msg;
 }
 
+// ── PERUSAHAAN PICKER ──
+async function searchPerusahaanDB(q) {
+  const results = document.getElementById('prsResults');
+  const hint = document.getElementById('prsHint');
+  clearTimeout(prsSearchTimeout);
+  if (!q || q.length < 2) { results.style.display = 'none'; return; }
+  if (!apiEndpoint) { hint.textContent = 'Isi endpoint website dulu.'; return; }
+
+  prsSearchTimeout = setTimeout(async () => {
+    results.innerHTML = '<div class="prs-item" style="color:var(--muted)">⏳ Mencari...</div>';
+    results.style.display = 'block';
+    try {
+      const searchUrl = apiEndpoint.replace('/loker/submit', '/loker/perusahaan/search');
+      const res = await fetch(searchUrl + '?q=' + encodeURIComponent(q), {
+        headers: { 'X-API-Key': apiWebKey }
+      });
+      const data = await res.json();
+      if (!data.data || data.data.length === 0) {
+        results.innerHTML = '<div class="prs-item" style="color:var(--muted)">Tidak ditemukan — aktifkan toggle untuk tambah baru</div>';
+        document.getElementById('prsNewBadge').style.display = 'inline-block';
+      } else {
+        results.innerHTML = '';
+        document.getElementById('prsNewBadge').style.display = 'none';
+        data.data.forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'prs-item';
+          div.innerHTML = `<div class="prs-nama">${p.nama_perusahaan}</div><div class="prs-kota">${p.kabkota||''} ${p.provinsi?'· '+p.provinsi:''}</div>`;
+          div.onclick = () => selectPerusahaan(p);
+          results.appendChild(div);
+        });
+      }
+    } catch(e) {
+      results.innerHTML = '<div class="prs-item" style="color:var(--danger)">Gagal koneksi ke website</div>';
+    }
+  }, 350);
+}
+
+function selectPerusahaan(p) {
+  selectedPerusahaan = p;
+  document.getElementById('prsSearch').value = '';
+  document.getElementById('prsResults').style.display = 'none';
+  document.getElementById('prsSelNama').textContent = p.nama_perusahaan;
+  document.getElementById('prsSelKota').textContent = (p.kabkota||'') + (p.provinsi ? ' · ' + p.provinsi : '');
+  document.getElementById('prsSelected').style.display = 'flex';
+  document.getElementById('prsHint').textContent = '✅ Perusahaan dipilih — lowongan akan ditambahkan ke perusahaan ini.';
+  document.getElementById('prsNewBadge').style.display = 'none';
+  // Auto-fill nama perusahaan di field lowongan untuk referensi
+}
+
+function clearPerusahaan() {
+  selectedPerusahaan = null;
+  document.getElementById('prsSelected').style.display = 'none';
+  document.getElementById('prsSearch').value = '';
+  document.getElementById('prsHint').textContent = 'Cari perusahaan yang sudah terdaftar di website. Jika belum ada, aktifkan toggle di bawah.';
+}
+
 // ── OPENAI API KEYS ──
 function saveKeys() {
   const vals = ['k1','k2','k3'].map(id=>document.getElementById(id).value.trim());
@@ -830,6 +928,11 @@ async function proses() {
     const caption=buildCaption(data);
     lastData={...data,perusahaan,includePerusahaan};
     render(data,perusahaan,caption,includePerusahaan);
+    // Auto-search perusahaan dari hasil ekstrak
+    if (data.nama_perusahaan && apiEndpoint) {
+      document.getElementById('prsSearch').value = data.nama_perusahaan;
+      searchPerusahaanDB(data.nama_perusahaan);
+    }
     hideLoad();
     document.getElementById('outputWrap').style.display='block';
     document.getElementById('urgentWrap').style.display=data.urgently?'block':'none';
@@ -1035,6 +1138,7 @@ async function submitToWebsite() {
   const p = lastData.perusahaan || {};
   const includePerusahaan = lastData.includePerusahaan;
 
+  // Jika perusahaan sudah dipilih dari DB, kirim perusahaan_id
   const payload = {
     // Lowongan
     judul:           d.judul_lowongan || '',
@@ -1053,10 +1157,11 @@ async function submitToWebsite() {
     gambar:          posterDriveUrl || null,
     // Perusahaan
     nama_perusahaan: d.nama_perusahaan || '',
+    perusahaan_id: selectedPerusahaan ? selectedPerusahaan.id : null,
   };
 
-  // Tambah data perusahaan kalau toggle ON
-  if (includePerusahaan) {
+  // Tambah data perusahaan kalau toggle ON DAN belum pilih dari DB
+  if (includePerusahaan && !selectedPerusahaan) {
     payload.p_alamat   = p.alamat || null;
     payload.p_kabkota  = d.kota || null;
     payload.p_provinsi = p.provinsi || null;
