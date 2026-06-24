@@ -472,23 +472,32 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     </div>
 
 
+  </div>
+  </div>
   </div> <!-- /mainPanel-lowongan -->
 
   <!-- PANEL BLOG -->
-  <div id="mainPanel-blog" style="display:none">
-    <div style="display:flex;flex-direction:column;gap:12px">
+  <div id="mainPanel-blog" style="display:none;padding:0 0px">
+    <div style="display:flex;flex-direction:column;gap:12px;padding:0 1px">
 
       <div class="card">
-        <div class="card-title">📋 Paste Teks Carousel IG</div>
+        <div class="card-header">
+          <div class="card-title">📋 Paste Teks Carousel IG</div>
+        </div>
+        <div class="card-body">
         <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Hasil scrape dari Claude Chrome extension</div>
         <textarea id="blogInputMain" rows="9" placeholder="Paste teks carousel Instagram di sini..." style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-size:12px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box"></textarea>
         <button onclick="generateBlogMain()" style="margin-top:10px;width:100%;padding:13px;background:var(--teal);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer">✨ Generate Artikel</button>
         <div id="blogLoadMain" style="display:none;text-align:center;padding:12px;font-size:12px;color:var(--muted)">⏳ Generating artikel dengan AI...</div>
         <div id="blogErrMain" style="display:none;color:#e53e3e;font-size:12px;margin-top:6px;padding:8px;background:#FEF2F2;border-radius:6px"></div>
+        </div>
       </div>
 
       <div class="card" id="blogPreviewMain" style="display:none">
-        <div class="card-title">👁️ Preview & Edit</div>
+        <div class="card-header">
+          <div class="card-title">👁️ Preview & Edit</div>
+        </div>
+        <div class="card-body">
         <div style="display:flex;flex-direction:column;gap:10px">
           <div>
             <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Judul</div>
@@ -524,15 +533,18 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <button onclick="submitBlogMain('published')" style="flex:1;padding:12px;background:var(--teal);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer">🚀 Langsung Publish</button>
           </div>
         </div>
+        </div> <!-- /card-body -->
       </div>
 
       <div id="blogResultMain" style="display:none" class="card">
+        <div class="card-body">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
           <div style="width:32px;height:32px;background:#E8F7F2;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px">✅</div>
           <div style="font-weight:700;font-size:14px">Artikel Tersimpan!</div>
         </div>
         <div id="blogResultInfoMain" style="font-size:12px;color:var(--muted);margin-bottom:12px"></div>
         <a id="blogEditLinkMain" href="#" target="_blank" style="display:inline-block;padding:10px 16px;background:var(--amber);color:white;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">✏️ Edit di Dashboard →</a>
+        </div>
       </div>
 
     </div>
@@ -544,6 +556,17 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 const GDRIVE_CLIENT_ID = '846764676775-1dr8m5bbbpp1ri22jvlc26d2d2m548ca.apps.googleusercontent.com';
 const GDRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
 const FOLDER_NAME = 'Loker Arsitek';
+
+// ── FIX: pastikan mainPanel-blog sejajar dengan mainPanel-lowongan ──
+document.addEventListener('DOMContentLoaded', function() {
+  const blogPanel = document.getElementById('mainPanel-blog');
+  const lowonganPanel = document.getElementById('mainPanel-lowongan');
+  if (blogPanel && lowonganPanel && lowonganPanel.contains(blogPanel)) {
+    lowonganPanel.parentNode.insertAfter
+      ? lowonganPanel.parentNode.insertAfter(blogPanel, lowonganPanel)
+      : lowonganPanel.parentNode.insertBefore(blogPanel, lowonganPanel.nextSibling);
+  }
+});
 
 // ── STATE ──
 let keys = [];
