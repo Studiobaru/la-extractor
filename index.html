@@ -1189,10 +1189,47 @@ async function submitToWebsite() {
     const data = await res.json();
 
     if (data.status === 'success') {
-      const url = data.data?.lowongan?.url || '';
-      const pStatus = data.data?.perusahaan?.status === 'created' ? '(perusahaan baru dibuat)' : '(perusahaan sudah ada)';
+      const low      = data.data?.lowongan || {};
+      const prs      = data.data?.perusahaan || {};
+      const igResult = data.data?.auto_post?.instagram || {};
+      const fbResult = data.data?.auto_post?.facebook || {};
+
+      const webUrl = low.url || '';
+      const igUrl  = igResult.url || null;
+      const fbUrl  = fbResult.url || null;
+
+      const pStatus = prs.status === 'created' ? '🆕 Perusahaan baru dibuat' : '✅ Perusahaan sudah ada';
+
+      // Build laporan
+      let laporanTeks = `✅ LOWONGAN BERHASIL DIPOSTING\n\n`;
+      laporanTeks += `📋 ${low.judul || ''}\n`;
+      laporanTeks += `🏢 ${prs.nama_perusahaan || ''}\n\n`;
+      laporanTeks += `🔗 Link Postingan:\n`;
+      laporanTeks += `🌐 Website: ${webUrl}\n`;
+      if (igUrl) laporanTeks += `📸 Instagram: ${igUrl}\n`;
+      if (fbUrl) laporanTeks += `📘 Facebook: ${fbUrl}\n`;
+      laporanTeks += `\n⏰ ${new Date().toLocaleString('id-ID')}`;
+
       status.className = 'submit-status ok';
-      status.innerHTML = `✅ Berhasil! ${pStatus}<br><a href="${url}" target="_blank" class="submit-link">🔗 Lihat lowongan →</a>`;
+      status.innerHTML = `
+        <div style="font-weight:700;font-size:13px;margin-bottom:10px">✅ Lowongan berhasil ditambahkan!</div>
+        <div style="font-size:11.5px;color:#065F46;margin-bottom:8px">${pStatus}</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+          <a href="${webUrl}" target="_blank" style="display:flex;align-items:center;gap:6px;color:#065F46;font-size:12px;font-weight:600;text-decoration:none">
+            🌐 Lihat di Website →
+          </a>
+          ${igUrl ? `<a href="${igUrl}" target="_blank" style="display:flex;align-items:center;gap:6px;color:#065F46;font-size:12px;font-weight:600;text-decoration:none">📸 Lihat di Instagram →</a>` : `<span style="font-size:11px;color:#94A3B8">📸 Instagram — ${igResult.message || 'auto-post nonaktif'}</span>`}
+          ${fbUrl ? `<a href="${fbUrl}" target="_blank" style="display:flex;align-items:center;gap:6px;color:#065F46;font-size:12px;font-weight:600;text-decoration:none">📘 Lihat di Facebook →</a>` : `<span style="font-size:11px;color:#94A3B8">📘 Facebook — ${fbResult.message || 'auto-post nonaktif'}</span>`}
+        </div>
+        <button onclick="copyLaporan()" style="width:100%;padding:9px;background:#065F46;color:white;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer" id="btnCopyLaporan">
+          📋 Copy Laporan
+        </button>
+        <div id="copyConfirm" style="display:none;text-align:center;font-size:11px;color:#065F46;margin-top:6px">✓ Laporan berhasil dicopy!</div>
+      `;
+
+      // Simpan laporan untuk copy
+      window._laporanTeks = laporanTeks;
+
       btn.textContent = '✅ Berhasil Ditambahkan';
     } else {
       status.className = 'submit-status err';
@@ -1206,6 +1243,26 @@ async function submitToWebsite() {
     btn.disabled = false;
     btn.textContent = '🚀 Tambahkan ke Website';
   }
+}
+
+function copyLaporan() {
+  if (!window._laporanTeks) return;
+  navigator.clipboard.writeText(window._laporanTeks).then(() => {
+    document.getElementById('copyConfirm').style.display = 'block';
+    setTimeout(() => {
+      const el = document.getElementById('copyConfirm');
+      if (el) el.style.display = 'none';
+    }, 2500);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = window._laporanTeks;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('copyConfirm').style.display = 'block';
+  });
 }
 
 // ── EXCEL ──
